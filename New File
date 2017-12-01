@@ -1,0 +1,87 @@
+////////////////////////////////////////////
+// UPDATED TOP  5 SCORE LIST FOR EASY LEVEL END OF GAME ************
+////////////////////////////////////////////
+
+
+struct expert_scoresheetEnd : Graph_lib::Window {
+	expert_scoresheetEnd(Point xy, int w, int h, const string& title, int score, string name);
+	Text top5{ Point{ 100, 100 }, "" };
+
+private:
+	Button play_button;
+	static void cb_play(Address, Address);
+	void play();
+
+	Button quit_button;
+	static void cb_quit(Address, Address);
+	void quit();
+
+	int NEW_score_advanced;
+	vector<Scores> scoresA;
+	Vector_ref<Text> textA;
+};
+
+expert_scoresheetEnd::expert_scoresheetEnd(Point xy, int w, int h, const string& title, int score, string name)
+	:Window{ xy,w,h,title },
+	play_button{ Point{ 100,400 }, 75, 30, "PLAY AGAIN",cb_play },
+	quit_button{ Point{ 300,400 }, 75, 30, "QUIT",cb_quit }
+
+{
+	top5.set_font_size(25);
+
+	string scoreOutPut = name + " Your Score is " + to_string(score);
+
+	top5.set_label(scoreOutPut);
+
+	NEW_score_easy = score;
+	
+	attach(top5);
+	attach(play_button);
+	attach(quit_button);
+
+	scores = readScores("expertScore.txt");
+
+
+	string finalVal = writeScores(scoresA, "expertScore.txt", name, NEW_score_easy);
+
+
+	for (int i = 0; i < 5; i++) {
+		string a = scoresI.at(i).getScoresandName();
+		cout << "these are the correcr " << a << endl;
+		int value = i * 30;
+		textA.push_back(new Text{ Point{ 320, 300 + value }, a });
+	}
+
+	
+	for (int i = 0; i < 5; i++) {
+		textA[i].set_font_size(20);
+		attach(textA[i]);
+	}
+
+	sort(scoresA.begin(), scoresA.end(), compareScore);
+
+	Fl::run();
+	Fl::redraw();
+
+}
+
+void expert_scoresheetEnd::cb_play(Address, Address pw2)
+{
+	reference_to<expert_scoresheetEnd>(pw2).play();
+}
+
+
+
+
+void expert_scoresheetEnd::cb_quit(Address, Address pw2)
+// call Simple_window::next() for the window located at pw
+{
+	reference_to<expert_scoresheetEnd>(pw2).quit();
+}
+
+
+void expert_scoresheetEnd::quit() {
+
+	hide();
+}
+
