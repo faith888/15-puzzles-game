@@ -1,7 +1,9 @@
 # 15-puzzles-game
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/IRfkBXDmmdM" frameborder="0" allowfullscreen></iframe>
+### Video demonstartion can be found here 
+https://www.youtube.com/embed/IRfkBXDmmdM
 
+###
 
 We had to create an arcade-like version of the 15 puzzles game. This included making a presentation screen, instructions, and various levels for each type of player skill level. We also decided to go with the medieval team for a theme was required for the game. The game also had to have a hint button that would tell the user which button to click next. Also, the scoreboard had to be updated for each person that plays the game.
 
